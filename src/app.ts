@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import './styles/app.css'
-import './styles/import.scss'
+import './styles/core.scss'
 import { pages } from './pages'
 import app from './app.vue'
 import { createRouter, createMemoryHistory } from 'vue-router'
