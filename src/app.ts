@@ -3,15 +3,15 @@ import './styles/app.css'
 import './styles/core.scss'
 import { pages } from './pages'
 import app from './app.vue'
-import { createRouter, createMemoryHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routes = [
     { path: '/', component: pages.main },
-    { path: '/about', component: pages.detail },
+    { path: '/5day/:id', component: pages.detail },
 ]
 
 export const router = createRouter({
-    history: createMemoryHistory(),
+    history: createWebHashHistory(process.env.CLIENT_HOST),
     routes,
 })
 

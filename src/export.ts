@@ -1,4 +1,8 @@
-export const api_key = process.env.SERVER_HOST
+export const _env = {
+    API_KEY: process.env.API_KEY,
+    API_URL: process.env.API_URL,
+    CLIENT_HOST: process.env.CLIENT_HOST,
+}
 
 export const icons = [
     '',

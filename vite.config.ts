@@ -15,14 +15,22 @@ export default defineConfig(({ mode }) => {
     resolve: {
       alias: {
         '@': path.resolve(__dirname, 'src/'),
-        '@component': path.resolve(__dirname, 'src/component'),
-        '@lib': path.resolve(__dirname, 'src/lib'),
-        '@service': path.resolve(__dirname, 'src/service'),
+        '@component': path.resolve(__dirname, 'src/component/'),
+        '@lib': path.resolve(__dirname, 'src/lib/'),
+        '@service': path.resolve(__dirname, 'src/service/'),
       }
     },
     define: {
       'process.env.API_URL': JSON.stringify(env.API_URL),
       'process.env.API_KEY': JSON.stringify(env.API_KEY),
+      'process.env.CLIENT_HOST': JSON.stringify(env.CLIENT_HOST),
+    },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler' // or "modern"
+        }
+      }
     }
   }
 })

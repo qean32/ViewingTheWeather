@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { icons } from '@/export'
+import { _env, icons } from '@/export'
 import { type CityType } from '@/model'
-import { cn, getBgColorCityWeather, toCelsius } from '@/lib'
+import { cn, getBgColorCityWeather } from '@/lib'
 import { PropType } from 'vue';
+import { Degrees } from './';
 
 defineProps({
     item: {
@@ -13,23 +14,21 @@ defineProps({
 </script>
 
 <template>
-    <div :class="cn('hover:opacity-95 duration-200 transition-all flex px-5 flex-col items-start rounded-md cursor-pointer py-5 bg-gray-400 text-center',
-        getBgColorCityWeather(item.WeatherIcon))">
-        <img :src=icons[item.WeatherIcon] alt="" class="pb-4">
-        <p class="text-4xl">{{ item.EnglishName }}</p>
-        <p class="text-sm">{{ item.Country.EnglishName }}</p>
-        <p class="text-lg">
-            <span>{{ toCelsius(item.Temperature.Imperial.Value) }}°{{ item.Temperature.Imperial.Unit }}</span>
-            <span class="text-sm"> ~{{ item.Temperature.Imperial.Value }}°{{ item.Temperature.Imperial.Unit }}</span>
-        </p>
-        <p>
-            Часовой пояс:
-            {{ item.TimeZone.Code }}
-        </p>
-    </div>
+    <RouterLink :to="`/5day/${item.Key}`">
+        <div :class="cn('flex justify-between flex-1 rounded-md cursor-pointer p-5 pr-6 hover:opacity-90 duration-200 transition-opacity',
+            getBgColorCityWeather(item.WeatherIcon))">
+            <div class='flex flex-col items-starttext-center'>
+                <p class="text-4xl">{{ item.LocalizedName }}</p>
+                <p class="text-sm">{{ item.Country.LocalizedName }}</p>
+                <Degrees :degree="item.Temperature.Imperial.Value" />
+                <p>Часовой пояс: {{ item.TimeZone.Code }}</p>
+            </div>
+            <img :src=icons[item.WeatherIcon] alt="" class="pb-4" width="80">
+        </div>
+    </RouterLink>
 </template>
 
-<style>
+<style scoped>
 p {
     color: white;
 }

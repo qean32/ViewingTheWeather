@@ -1,5 +1,7 @@
-import cityWeather from "./city-weather.vue";
+import CityWeather from "./city-weather.vue";
+import Degrees from "./degrees.vue";
 
 export {
-    cityWeather
+    CityWeather,
+    Degrees
 }
