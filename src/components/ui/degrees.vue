@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { toCelsius } from '@/lib'
+import CelsiusDegree from './celsius-degree.vue';
 
 defineProps({
     degree: {
@@ -9,7 +10,6 @@ defineProps({
     className: {
         type: String,
         required: false,
-        default: 'text-white text-lg'
     }
 })
 </script>
@@ -17,7 +17,8 @@ defineProps({
 <template>
     <p :class="className">
         <span :class="className">{{ toCelsius(degree) }}
-            °C</span>
+            <CelsiusDegree />
+        </span>
         <span class="text-sm"> ~{{ degree }}
             °F</span>
     </p>

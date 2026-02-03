@@ -1,7 +1,7 @@
-import detail from "./detail.vue";
+import _5day from "./_5day.vue";
 import main from "./main.vue";
 
 export const pages = {
-    detail,
     main,
+    _5day,
 }

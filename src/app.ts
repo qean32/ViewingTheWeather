@@ -7,7 +7,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routes = [
     { path: '/', component: pages.main },
-    { path: '/5day/:id', component: pages.detail },
+    { path: '/5day/:id', component: pages._5day },
 ]
 
 export const router = createRouter({

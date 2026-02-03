@@ -1,6 +1,7 @@
 @use './import' as *;
+@use './custom/short-cart.scss';
 
-@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=TikTok+Sans:opsz,wght@12..36,300..900&family=WDXL+Lubrifont+JP+N&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Oswald:wght@200..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=SN+Pro:ital,wght@0,200..900;1,200..900&family=TikTok+Sans:opsz,wght@12..36,300..900&family=WDXL+Lubrifont+JP+N&display=swap');
 
 
 *::-webkit-scrollbar {
@@ -8,7 +9,9 @@
 }
 
 * {
-    font-family: "WDXL Lubrifont JP N", "DFTFONT", Arial;
+    font-family: "WDXL Lubrifont JP N", sans-serif;
+    font-weight: 400;
+    font-style: normal;
     letter-spacing: 0.7px;
     scroll-behavior: smooth;
     color: $dark-color;
@@ -23,8 +26,35 @@
     }
 }
 
+body {
+    background-color: rgb(31, 31, 31);
+}
+
 #app {
     display: flex;
     justify-content: center;
-    background-color: $primary-color;
+}
+
+.hover-p-full {
+    &:hover {
+        width: 160px;
+
+        & p {
+            width: fit-content;
+        }
+    }
+}
+
+.cart {
+    -webkit-box-shadow: 0px 16px 17px -14px rgba(15, 15, 15, 0.2);
+    -moz-box-shadow: 0px 16px 17px -14px rgba(15, 15, 15, 0.2);
+    box-shadow: 0px 16px 17px -14px rgba(15, 15, 15, 0.2);
+}
+
+.text-dark {
+    color: $dark-color
+}
+
+.text-12xl {
+    font-size: 200px;
 }

@@ -1,4 +1,4 @@
-export type CityType = {
+export type CurrentWType = {
     Key: string,
     LocalizedName: string,
     EnglishName: string,
