@@ -1,10 +1,12 @@
-class serverServiceClass {
-    getDetailSity() {
+import { axiosInstance } from "./instance"
 
+class serverServiceClass {
+    get_5days() {
+        return axiosInstance.get(`${process.env.SERVER_HOST}_5day`)
     }
 
-    getAllData() {
-
+    getTowns() {
+        return axiosInstance.get(`${process.env.SERVER_HOST}towns`)
     }
 }
 

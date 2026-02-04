@@ -1,7 +1,7 @@
 import Cart from "./cart.vue";
-import ShortCart from "./short-cart.vue";
+import SmallCart from "./small-cart.vue";
 
 export {
     Cart,
-    ShortCart
+    SmallCart
 }

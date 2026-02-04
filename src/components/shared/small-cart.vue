@@ -3,12 +3,12 @@ import { _env, iconsPack } from '@/export'
 import { CurrentWType } from '@/model'
 import { cn, getBgColorCityWeather, getCurrentTime } from '@/lib'
 import { Degrees } from '../ui';
-import { useDynamicComponent } from '@/lib/hook/use-icon'
+import { useIcon } from '@/lib/hook/'
 
 const { item } = defineProps<{
     item: CurrentWType
 }>()
-const Icon = useDynamicComponent(item.WeatherIcon)
+const Icon = useIcon(item.WeatherIcon)
 </script>
 
 <template>
@@ -17,12 +17,12 @@ const Icon = useDynamicComponent(item.WeatherIcon)
             getBgColorCityWeather(item.WeatherIcon))">
             <div class="content">
                 <h1 class="Condition flex items-center gap-3">
-                    <Icon color="white" :stroke-width="3" /> Sunny
+                    <Icon color="white" :stroke-width="3" :fill="'white'" /> Sunny
                 </h1>
                 <h1 class="Temp">
                     <Degrees :degree="item.Temperature.Imperial.Value" :class="'text-white text-4xl'" />
                 </h1>
-                <h1 class="Time text-3xl">{{ getCurrentTime() }}</h1>
+                <h1 class="Time text-3xl">{{ getCurrentTime(null, item.TimeZone.GmtOffset) }}</h1>
                 <h1 class="Location text-xl">
                     {{ item.LocalizedName }},
                     {{ item.TimeZone.Code }}

@@ -24,6 +24,7 @@ export default defineConfig(({ mode }) => {
       'process.env.API_URL': JSON.stringify(env.API_URL),
       'process.env.API_KEY': JSON.stringify(env.API_KEY),
       'process.env.CLIENT_HOST': JSON.stringify(env.CLIENT_HOST),
+      'process.env.SERVER_HOST': JSON.stringify(env.SERVER_HOST),
     },
     css: {
       preprocessorOptions: {

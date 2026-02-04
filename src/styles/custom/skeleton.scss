@@ -1,0 +1,19 @@
+@use '../import.scss' as *;
+
+@keyframes pulse-bg {
+    0% {
+        background-color: $dark-color;
+    }
+
+    50% {
+        background-color: #242424;
+    }
+
+    100% {
+        background-color: $dark-color;
+    }
+}
+
+.skeleton {
+    animation: pulse-bg 1s infinite;
+}
