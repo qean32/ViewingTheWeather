@@ -6,14 +6,14 @@ import { BackArrow } from '@/components/ui';
 import { CartSceleton } from '@/components/ui/skeleton';
 
 const route = useRoute();
-const postId = computed(() => route.params.id);
-console.log(postId.value)
+const { value: key } = computed(() => route.params.key);
 </script>
 
 <template>
     <BackArrow />
     <Suspense>
-        <Cart :id="0" />
+        <!-- @vue-ignore -->
+        <Cart :_key="key" />
         <template #fallback>
 
             <CartSceleton />

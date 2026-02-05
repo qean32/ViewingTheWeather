@@ -1,19 +1,22 @@
 <script async setup lang="ts">
-import { _5dayWType } from '@/model';
+import { _5dayWType, towmType } from '@/model';
 import { CelsiusDegree, DayShortInfo, HourShortInfo } from '../ui/';
-import { cn, getBgColorCityWeather, getCurrentTime } from '@/lib';
+import { cn, getBgColorCityWeather, getCurrentTime, toCelsius } from '@/lib';
 import { iconsPack } from '@/export';
 import { serverService } from '@/service/server';
 import { ref } from 'vue';
 
 let _5day = ref<_5dayWType | null>(null)
-const { } = defineProps<{
-    id: number
+let town = ref<towmType | null>(null)
+const { _key } = defineProps<{
+    _key: number
 }>()
-await serverService.get_5days()
+console.log(_key)
+await serverService.get_5days(_key ?? 0)
     .then(data => {
         if (data.status == 200 || data.status == 304) {
-            _5day.value = data.data
+            _5day.value = data.data[0]
+            town.value = data.data[1]
         }
     })
 </script>
@@ -23,13 +26,14 @@ await serverService.get_5days()
         <div :class="cn('w-9/12 p-5 text-white', getBgColorCityWeather(_5day.DailyForecasts[0].Day.Icon))">
             <div class="flex justify-center pt-5">
                 <div class="flex justify-between w-9/12 text-2xl">
-                    <!-- <p class="">{{ town.LocalizedName }}</p> -->
+                    <p class="" v-if="town">{{ town.LocalizedName }}</p>
                     <p class="">{{ getCurrentTime(_5day.Headline.EffectiveDate) }}</p>
                 </div>
             </div>
             <div class="h-8/12 flex justify-center _5days-center gap-4">
                 <div class="text-center">
-                    <p class="text-12xl pb-3">{{ _5day.DailyForecasts[0].Temperature.Maximum.Value }}</p>
+                    <p class="text-12xl pb-3">{{ toCelsius(_5day.DailyForecasts[0].Temperature.Maximum.Value)
+                        }}</p>
                     <p class="text-4xl -translate-y-full">
                         {{ iconsPack[_5day.DailyForecasts[0].Day.Icon].description }}
                     </p>
@@ -39,11 +43,11 @@ await serverService.get_5days()
                         <CelsiusDegree />
                     </p>
                     <div class="flex justify-between">
-                        <p class="">от {{ _5day.DailyForecasts[0].Temperature.Minimum.Value }}</p>
+                        <p class="">от {{ toCelsius(_5day.DailyForecasts[0].Temperature.Minimum.Value) }}</p>
                         <CelsiusDegree />
                     </div>
                     <div class="flex justify-between">
-                        <p class="">от {{ _5day.DailyForecasts[0].Temperature.Maximum.Value }}</p>
+                        <p class="">до {{ toCelsius(toCelsius(_5day.DailyForecasts[0].Temperature.Maximum.Value)) }}</p>
                         <CelsiusDegree />
                     </div>
                 </div>
@@ -60,14 +64,14 @@ await serverService.get_5days()
                 <div class="h-8/12 flex justify-center _5days-center gap-4">
                     <div class="text-center">
                         <p class="text-4xl pb-1">
-                            {{ _5day.DailyForecasts[0].Temperature.Maximum.Value }}
+                            {{ toCelsius(_5day.DailyForecasts[0].Temperature.Maximum.Value) }}
                             <CelsiusDegree />
                         </p>
                         <p class="text-2xl">{{ _5day.Headline.Category }}</p>
                     </div>
                 </div>
                 <p class="text-sm -translate-y-2">
-                    Ощущается как {{ _5day.DailyForecasts[0].Temperature.Maximum.Value - 2 }}
+                    Ощущается как {{ toCelsius(_5day.DailyForecasts[0].Temperature.Maximum.Value) - 2 }}
                     <CelsiusDegree />
                 </p>
             </div>
@@ -76,7 +80,7 @@ await serverService.get_5days()
                 <div class="flex gap-3 justify-center flex-wrap px-4">
                     <!-- @vue-ignore -->
                     <HourShortInfo v-for="(_, i) in Array(6).fill()" :index="i"
-                        :degree="_5day.DailyForecasts[0].Temperature.Maximum.Value" />
+                        :degree="toCelsius(_5day.DailyForecasts[0].Temperature.Maximum.Value)" />
                 </div>
             </div>
         </div>

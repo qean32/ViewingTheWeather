@@ -40,13 +40,13 @@ watch(search, () => {
         return
     }
     // @ts-ignore
-    towns.value = memoryTowns.value.filter(item => item.LocalizedName.includes(search.value))
+    towns.value = memoryTowns.value.filter(item => item.LocalizedName.toLowerCase().includes(search.value.toLowerCase()))
 })
 </script>
 
 <template>
     <Suspense>
-        <Cart :id="0" />
+        <Cart :_key="294021" />
         <template #fallback>
 
             <CartSceleton />
@@ -59,6 +59,7 @@ watch(search, () => {
         <p class="text-6xl text-white">Загрузка..</p>
         <!-- <SmallCartSkeleton v-for="_ in citis" /> -->
     </div>
+    <p class="text-6xl text-white pt-5" v-if="!towns.length && !loading">Ничего не найдено!</p>
     <div class="pt-5 grid grid-cols-5 gap-5 min-h-150" v-if="!loading">
 
         <SmallCart v-for="item in towns" :item="item" />
