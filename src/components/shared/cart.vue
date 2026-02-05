@@ -1,8 +1,7 @@
 <script async setup lang="ts">
 import { _5dayWType, towmType } from '@/model';
 import { CelsiusDegree, DayShortInfo, HourShortInfo } from '../ui/';
-import { cn, getBgColorCityWeather, getCurrentTime, toCelsius } from '@/lib';
-import { iconsPack } from '@/export';
+import { cn, getBgColorCityWeather, getCurrentTime, nowInZone, toCelsius } from '@/lib';
 import { serverService } from '@/service/server';
 import { ref } from 'vue';
 
@@ -11,7 +10,6 @@ let town = ref<towmType | null>(null)
 const { _key } = defineProps<{
     _key: number
 }>()
-console.log(_key)
 await serverService.get_5days(_key ?? 0)
     .then(data => {
         if (data.status == 200 || data.status == 304) {
@@ -22,23 +20,21 @@ await serverService.get_5days(_key ?? 0)
 </script>
 
 <template #default>
-    <div class="h-160 rounded-2xl flex overflow-hidden w-full cart relative mt-5" v-if="_5day">
+    <div class="h-170 rounded-2xl flex overflow-hidden w-full cart relative mt-5" v-if="_5day">
         <div :class="cn('w-9/12 p-5 text-white', getBgColorCityWeather(_5day.DailyForecasts[0].Day.Icon))">
             <div class="flex justify-center pt-5">
                 <div class="flex justify-between w-9/12 text-2xl">
                     <p class="" v-if="town">{{ town.LocalizedName }}</p>
-                    <p class="">{{ getCurrentTime(_5day.Headline.EffectiveDate) }}</p>
+                    <p class="">{{ nowInZone(town?.TimeZone.Name) }}</p>
                 </div>
             </div>
-            <div class="h-8/12 flex justify-center _5days-center gap-4">
+            <div class="h-6/12 flex justify-center _5days-center gap-4">
                 <div class="text-center">
-                    <p class="text-12xl pb-3">{{ toCelsius(_5day.DailyForecasts[0].Temperature.Maximum.Value)
-                        }}</p>
+                    <p class="text-12xl pb-3">{{ toCelsius(_5day.DailyForecasts[0].Temperature.Maximum.Value) }}</p>
                     <p class="text-4xl -translate-y-full">
-                        {{ iconsPack[_5day.DailyForecasts[0].Day.Icon].description }}
                     </p>
                 </div>
-                <div class="text-xl">
+                <div class="text-xl flex items-center flex-col justify-center">
                     <p class="text-8xl">
                         <CelsiusDegree />
                     </p>
@@ -52,6 +48,7 @@ await serverService.get_5days(_key ?? 0)
                     </div>
                 </div>
             </div>
+            <p v-if="town" class="text-center -translate-y-1/3 py-5 pb-10 text-3xl">{{ town.WeatherText }}</p>
             <div class="flex gap-5 justify-center" v-if="!!_5day.DailyForecasts.length">
                 <DayShortInfo v-for="_5dayDay in _5day.DailyForecasts" :item="_5dayDay" />
                 <DayShortInfo :item="_5day.DailyForecasts[4]" />
