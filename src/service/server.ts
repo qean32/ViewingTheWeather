@@ -8,6 +8,10 @@ class serverServiceClass {
     getTowns() {
         return axiosInstance.get(`${process.env.SERVER_HOST}towns`)
     }
+
+    search(search: string) {
+        return axiosInstance.get(`${process.env.SERVER_HOST}search?search=${search}`)
+    }
 }
 
 export const serverService = new serverServiceClass()

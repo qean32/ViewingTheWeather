@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import { towns, _days } from './data.js'
+import { towns, _days, searchTowns } from './data.js'
 
 const app = express()
 app.use(cors())
@@ -15,6 +15,16 @@ app.get('/_5day', (req, res) => {
     setTimeout(() => {
         if (req.query.key) {
             res.json([_days.get(Number(req.query.key)), towns.find(item => Number(item.Key) == Number(req.query.key))])
+            return
+        }
+        res.json('no')
+    }, 500)
+})
+
+app.get('/search', (req, res) => {
+    setTimeout(() => {
+        if (req.query.search) {
+            res.json(searchTowns.get(req.query.search))
             return
         }
         res.json('no')

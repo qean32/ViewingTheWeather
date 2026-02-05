@@ -2,12 +2,14 @@ import { create } from "vue-zustand"
 
 interface store {
     search: string,
-    setSearch: (search: string) => void
+    local: boolean,
+    setSearch: (search: string, local: boolean) => void
 }
 
 export const useSearch = create<store>(set => ({
     search: '',
-    setSearch: (search: string) => {
-        set(() => ({ search: search }))
+    local: true,
+    setSearch: (search: string, local: boolean) => {
+        set(() => ({ search: search, local: local }))
     }
 }))

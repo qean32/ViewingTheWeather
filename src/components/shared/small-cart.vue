@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { _env, iconsPack } from '@/export'
-import { CurrentWType } from '@/model'
+import { currentWType } from '@/model'
 import { cn, getBgColorCityWeather, nowInZone } from '@/lib'
 import { Degrees } from '../ui';
 import { useIcon } from '@/lib/hook/'
 
 const { item } = defineProps<{
-    item: CurrentWType
+    item: currentWType
 }>()
 const Icon = useIcon(item.WeatherIcon)
 </script>

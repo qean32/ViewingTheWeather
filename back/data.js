@@ -3652,3 +3652,77 @@ export const towns = [
         "Link": "http://www.accuweather.com/ru/is/reykjavik/190390/current-weather/190390"
     }
 ]
+
+const yl = [
+    {
+        "Version": 1,
+        "Key": "296217",
+        "Type": "City",
+        "Rank": 31,
+        "LocalizedName": "Ульяновск",
+        "EnglishName": "Ulyanovsk",
+        "PrimaryPostalCode": "",
+        "Region": {
+            "ID": "ASI",
+            "LocalizedName": "Азия",
+            "EnglishName": "Asia"
+        },
+        "Country": {
+            "ID": "RU",
+            "LocalizedName": "Россия",
+            "EnglishName": "Russia"
+        },
+        "AdministrativeArea": {
+            "ID": "ULY",
+            "LocalizedName": "Ульяновск",
+            "EnglishName": "Ul'yanovsk",
+            "Level": 1,
+            "LocalizedType": "Область",
+            "EnglishType": "Oblast",
+            "CountryID": "RU"
+        },
+        "TimeZone": {
+            "Code": "MSK+1",
+            "Name": "Europe/Ulyanovsk",
+            "GmtOffset": 4.0,
+            "IsDaylightSaving": false,
+            "NextOffsetChange": null
+        },
+        "GeoPosition": {
+            "Latitude": 54.311,
+            "Longitude": 48.364,
+            "Elevation": {
+                "Metric": {
+                    "Value": 110.0,
+                    "Unit": "m",
+                    "UnitType": 5
+                },
+                "Imperial": {
+                    "Value": 360.0,
+                    "Unit": "ft",
+                    "UnitType": 0
+                }
+            }
+        },
+        "IsAlias": false,
+        "SupplementalAdminAreas": [
+            {
+                "Level": 2,
+                "LocalizedName": "Ulyanovsk City",
+                "EnglishName": "Ulyanovsk City"
+            }
+        ],
+        "DataSets": [
+            "AirQualityCurrentConditions",
+            "AirQualityForecasts",
+            "Alerts",
+            "ForecastConfidence",
+            "FutureRadar",
+            "MinuteCast"
+        ]
+    }
+]
+
+export const searchTowns = new Map([
+    ['Ульяновск', yl],
+])

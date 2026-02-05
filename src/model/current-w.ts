@@ -1,4 +1,4 @@
-export type CurrentWType = {
+export type currentWType = {
     Key: string,
     LocalizedName: string,
     EnglishName: string,
